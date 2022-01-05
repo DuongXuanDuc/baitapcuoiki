@@ -5,13 +5,22 @@
  */
 package quanlidaotao;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author os
  */
 public class StudentFrame extends javax.swing.JFrame {
 
+    DefaultTableModel tblModel;
+    
+    SVModify sVModify = new SVModify();
+    
     SinhVien sv;
+    List<Diem> diemList = new ArrayList<>();
     /**
      * Creates new form StudentFrame
      */
@@ -23,6 +32,11 @@ public class StudentFrame extends javax.swing.JFrame {
         txtNgaySinhSV.setText(sv.getNgaySinh());
         txtEmailSV.setText(sv.getEmail());
         cbKhoaSV.setSelectedItem(sv.getKhoa());
+        txtNamNhapHoc.setText(sv.getNamNhapHoc());
+        
+        tblModel = (DefaultTableModel) tblDiem.getModel();
+        
+        showDiem();
     }
 
     private StudentFrame() {
@@ -46,7 +60,7 @@ public class StudentFrame extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblSinhVien = new javax.swing.JTable();
+        tblDiem = new javax.swing.JTable();
         btnFindSV4 = new javax.swing.JButton();
         txtHoTenSV = new javax.swing.JTextField();
         txtNgaySinhSV = new javax.swing.JTextField();
@@ -70,7 +84,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jLabel33.setText("Khoa:*");
 
-        tblSinhVien.setModel(new javax.swing.table.DefaultTableModel(
+        tblDiem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -86,7 +100,7 @@ public class StudentFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblSinhVien);
+        jScrollPane2.setViewportView(tblDiem);
 
         btnFindSV4.setText("Cập nhật");
         btnFindSV4.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +239,17 @@ public class StudentFrame extends javax.swing.JFrame {
         });
     }
 
+    private void showDiem(){
+        diemList = sVModify.findDiembyID(sv);
+        
+        tblModel.setRowCount(0);
+        
+        for (Diem diem : diemList) {
+            tblModel.addRow(new Object[] {tblModel.getRowCount() + 1, diem.getMon(), String.valueOf(diem.getDiem())});
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFindSV4;
     private javax.swing.JComboBox<String> cbGioiTinhSV;
@@ -238,7 +263,7 @@ public class StudentFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblSinhVien;
+    private javax.swing.JTable tblDiem;
     private javax.swing.JTextField txtEmailSV;
     private javax.swing.JTextField txtHoTenSV;
     private javax.swing.JTextField txtNamNhapHoc;

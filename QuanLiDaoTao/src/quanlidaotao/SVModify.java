@@ -188,4 +188,36 @@ public class SVModify {
         // Kết thức
         return studentList;
     }
+        
+    public List<Diem> findDiembyID(SinhVien sv){
+        List<Diem> diemList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DriverManager.getConnection(DB, user, pass);
+            
+            String sql = "SELECT * FROM Diem WHERE idSV = ?";
+            statement = connection.prepareCall(sql);
+            statement.setInt(1, sv.getID());
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {                
+                Diem diem = new Diem(resultSet.getString("mon"), resultSet.getInt("diem"), resultSet.getInt("idSV"));
+                diemList.add(diem);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(SVModify.class.getName()).log(Level.SEVERE, null, e);
+        } finally{
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    Logger.getLogger(SVModify.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+        }
+        
+        return diemList;
+    }    
 }
