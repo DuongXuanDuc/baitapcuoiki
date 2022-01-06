@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author os
  */
 public class SVModify {
-    public static String DB = "jdbc:mysql://localhost:3306/quanlidaihoc?serverTimezone=UTC";
+    public static String DB = "jdbc:mysql://localhost:3306/quanlidaihoc?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
     public static String user = "root";
     public static String pass = "";
     
@@ -68,6 +68,7 @@ public class SVModify {
             
             //query
             String sql = "INSERT INTO SinhVien(hoTen, gioiTinh, ngaySinh, email, khoa, namNhapHoc) VALUES(?, ?, ?, ?, ?, ?)";
+            
             statement = connection.prepareCall(sql);
             
             statement.setString(1, sv.getHoTen());
@@ -92,7 +93,7 @@ public class SVModify {
         }
     }
     
-    public static void update(GiangVien gv){
+    public static void update(SinhVien gv){
         Connection connection = null;
         PreparedStatement statement = null;
         //lấy tất cả danh sách sinh viên
@@ -100,7 +101,7 @@ public class SVModify {
             connection = DriverManager.getConnection(DB, user, pass);
             
             //query
-            String sql = "UPDATE GiangVien SET hoTen=?, gioiTinh=?, ngaySinh=?, email=?, khoa=? WHERE id=?";
+            String sql = "UPDATE SinhVien SET hoTen=?, gioiTinh=?, ngaySinh=?, email=?, khoa=? WHERE id=?";
             statement = connection.prepareCall(sql);
             
             statement.setString(1, gv.getHoTen());
@@ -112,20 +113,21 @@ public class SVModify {
             
             statement.execute();
             
+            
         } catch (SQLException e) {
-            Logger.getLogger(GVModify.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(SVModify.class.getName()).log(Level.SEVERE, null, e);
         } finally{
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
-                    Logger.getLogger(GVModify.class.getName()).log(Level.SEVERE, null, e);
+                    Logger.getLogger(SVModify.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         }
     }
     
-      public static void delete(SinhVien sv){
+    public static void delete(SinhVien sv){
         Connection connection = null;
         PreparedStatement statement = null;
         //lấy tất cả danh sách sinh viên
@@ -153,7 +155,7 @@ public class SVModify {
         }
     }
     
-        public List<SinhVien> findByTen(String hoTen) {
+    public List<SinhVien> findByTen(String hoTen) {
         List<SinhVien> studentList = new ArrayList<>();
         
         Connection connection = null;
@@ -220,4 +222,34 @@ public class SVModify {
         
         return diemList;
     }    
+    
+    public static void insertDiem(Diem d){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DriverManager.getConnection(DB, user, pass);
+            
+            //query
+            String sql = "INSERT INTO Diem(mon, diem, idSV) VALUES(?, ?, ?)";
+            
+            statement = connection.prepareCall(sql);
+            
+            statement.setString(1, d.getMon());
+            statement.setInt(2, d.getDiem());
+            statement.setInt(3, d.getIdSV());
+            
+            statement.execute();
+            
+        } catch (SQLException e) {
+            Logger.getLogger(SVModify.class.getName()).log(Level.SEVERE, null, e);
+        } finally{
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    Logger.getLogger(SVModify.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+        }
+    }
 }

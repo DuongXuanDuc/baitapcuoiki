@@ -7,6 +7,7 @@ package quanlidaotao;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,6 +63,11 @@ public class LoginForm extends javax.swing.JFrame {
         });
 
         btnExit.setText("Thoát");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,23 +119,35 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        int i = 0;
         String ckUser = txtUser.getText().trim();
         String ckPass = txtPass.getText().trim();
         if (ckUser.equalsIgnoreCase(user) && ckPass.equalsIgnoreCase(pass)){
             AdminFrame frame = new AdminFrame();
             frame.setVisible(true);
             this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
         }
         for (SinhVien sinhVien : svList) {
             if (ckUser.equalsIgnoreCase(sinhVien.getEmail()) && ckPass.equalsIgnoreCase("123456A")){
                 StudentFrame stf = new StudentFrame(sinhVien);
                 stf.setVisible(true);
                 this.setVisible(false);
+                i++;
                 break;
             }
         }
+        if(i==0){
+            JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
+        }
         
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments

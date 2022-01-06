@@ -5,42 +5,27 @@
  */
 package quanlidaotao;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author os
  */
-public class StudentFrame extends javax.swing.JFrame {
-
-    DefaultTableModel tblModel;
-    
+public class NhapDiemFrame extends javax.swing.JFrame {
     SVModify sVModify = new SVModify();
     
     SinhVien sv;
-    List<Diem> diemList = new ArrayList<>();
     /**
-     * Creates new form StudentFrame
+     * Creates new form NhapDiemFrame
      */
-    public StudentFrame(SinhVien sv) {
+    public NhapDiemFrame(SinhVien sv) {
         initComponents();
         this.sv = sv;
         txtHoTenSV.setText(sv.getHoTen());
-        cbGioiTinhSV.setSelectedItem(sv.getGioiTinh());
         txtNgaySinhSV.setText(sv.getNgaySinh());
         txtEmailSV.setText(sv.getEmail());
-        cbKhoaSV.setSelectedItem(sv.getKhoa());
-        txtNamNhapHoc.setText(sv.getNamNhapHoc());
-        
-        tblModel = (DefaultTableModel) tblDiem.getModel();
-        
-        showDiem();
+        cbGioiTinhSV.setSelectedItem(sv.getGioiTinh());
     }
 
-    private StudentFrame() {
-        
+    private NhapDiemFrame() {
     }
 
     /**
@@ -52,28 +37,23 @@ public class StudentFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblDiem = new javax.swing.JTable();
         btnUpdate = new javax.swing.JButton();
         txtHoTenSV = new javax.swing.JTextField();
         txtNgaySinhSV = new javax.swing.JTextField();
         txtEmailSV = new javax.swing.JTextField();
-        cbKhoaSV = new javax.swing.JComboBox<>();
         cbGioiTinhSV = new javax.swing.JComboBox<>();
         jLabel36 = new javax.swing.JLabel();
-        txtNamNhapHoc = new javax.swing.JTextField();
+        txtDiem = new javax.swing.JTextField();
+        txtMon = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("THÔNG TIN SINH VIÊN");
 
         jLabel29.setText("Họ Và Tên:*");
 
@@ -83,25 +63,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jLabel32.setText("Email:*");
 
-        jLabel33.setText("Khoa:*");
-
-        tblDiem.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "STT", "Môn", "Điểm"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tblDiem);
+        jLabel33.setText("Môn:*");
 
         btnUpdate.setText("Cập nhật");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -110,11 +72,9 @@ public class StudentFrame extends javax.swing.JFrame {
             }
         });
 
-        cbKhoaSV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán Học", "Hóa Học", "Vật Lí", "Sinh Học" }));
-
         cbGioiTinhSV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
-        jLabel36.setText("Năm nhập học:*");
+        jLabel36.setText("Điểm:*");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -129,22 +89,24 @@ public class StudentFrame extends javax.swing.JFrame {
                             .addComponent(jLabel31)
                             .addComponent(jLabel32)
                             .addComponent(jLabel33))
-                        .addGap(44, 44, 44)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel36)
+                        .addGap(74, 74, 74)))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(txtDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(356, 356, 356))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbKhoaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate)
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtHoTenSV, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                                 .addComponent(txtEmailSV))
                             .addComponent(cbGioiTinhSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgaySinhSV, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnUpdate)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(jLabel36)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtNamNhapHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane2)
+                            .addComponent(txtNgaySinhSV, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMon, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 37, Short.MAX_VALUE))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,34 +130,35 @@ public class StudentFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(cbKhoaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(txtNamNhapHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(btnUpdate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(40, Short.MAX_VALUE))
         );
+
+        jLabel1.setText("NHẬP ĐIỂM CỦA SINH VIÊN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(309, 309, 309)
+                .addGap(203, 203, 203)
                 .addComponent(jLabel1)
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 136, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,16 +166,13 @@ public class StudentFrame extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        String hoTen = txtHoTenSV.getText().trim();
-        String gioiTinh = cbGioiTinhSV.getSelectedItem().toString();
-        String ngaySinh = txtNgaySinhSV.getText().trim();
-        String email = txtEmailSV.getText().trim();
-        String khoa = cbKhoaSV.getSelectedItem().toString();
-        String namNhapHoc = txtNamNhapHoc.getText().trim();
+        String monHoc = txtMon.getText().trim();
+        String diem = txtDiem.getText().trim();
         
-        SinhVien sinhvien = new SinhVien(sv.getID(), hoTen, gioiTinh, ngaySinh, email, khoa, namNhapHoc);
-        sVModify.update(sinhvien);
-        System.out.println("");
+        Diem d = new Diem(monHoc, Integer.parseInt(diem), sv.getID());
+        
+        sVModify.insertDiem(d);
+        System.out.println("Thành công");
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
@@ -232,39 +192,27 @@ public class StudentFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhapDiemFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhapDiemFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhapDiemFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhapDiemFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentFrame().setVisible(true);
+                new NhapDiemFrame().setVisible(true);
             }
         });
     }
 
-    private void showDiem(){
-        diemList = sVModify.findDiembyID(sv);
-        
-        tblModel.setRowCount(0);
-        
-        for (Diem diem : diemList) {
-            tblModel.addRow(new Object[] {tblModel.getRowCount() + 1, diem.getMon(), String.valueOf(diem.getDiem())});
-        }
-    }
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbGioiTinhSV;
-    private javax.swing.JComboBox<String> cbKhoaSV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
@@ -273,11 +221,10 @@ public class StudentFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblDiem;
+    private javax.swing.JTextField txtDiem;
     private javax.swing.JTextField txtEmailSV;
     private javax.swing.JTextField txtHoTenSV;
-    private javax.swing.JTextField txtNamNhapHoc;
+    private javax.swing.JTextField txtMon;
     private javax.swing.JTextField txtNgaySinhSV;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,12 +17,15 @@ import javax.swing.table.DefaultTableModel;
 public class AdminFrame extends javax.swing.JFrame {
     DefaultTableModel tblModel;
     DefaultTableModel tblModelSV;
+    DefaultTableModel tblModelLH;
     
     List<GiangVien> gvList = new ArrayList<>();
     List<SinhVien> svList = new ArrayList<>();
+    List<LopHoc> lhList = new ArrayList<>();
     
     GVModify gVModify = new GVModify();
     SVModify sVModify = new SVModify();
+    LopHocModify lhm = new LopHocModify();
     
     
     /**
@@ -33,9 +36,12 @@ public class AdminFrame extends javax.swing.JFrame {
         
         tblModel = (DefaultTableModel) tblGiangVien.getModel();
         tblModelSV = (DefaultTableModel) tblSinhVien.getModel();
+        tblModelLH = (DefaultTableModel) tblLopHoc.getModel();
         
         showGV();
         showSV();
+        showLH();
+        
     }
 
     /**
@@ -48,7 +54,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        Admin = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -70,6 +76,7 @@ public class AdminFrame extends javax.swing.JFrame {
         txtEmailGV = new javax.swing.JTextField();
         cbKhoaGV = new javax.swing.JComboBox<>();
         cbGioiTinhGV = new javax.swing.JComboBox<>();
+        btnDXGV = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -94,6 +101,24 @@ public class AdminFrame extends javax.swing.JFrame {
         cbGioiTinhSV = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         txtNamNhapHoc = new javax.swing.JTextField();
+        btnNhapDiem = new javax.swing.JButton();
+        btnDXSV = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblLopHoc = new javax.swing.JTable();
+        btnAddLH = new javax.swing.JButton();
+        btnResetLH = new javax.swing.JButton();
+        btnDeleteLH = new javax.swing.JButton();
+        btnFindLH = new javax.swing.JButton();
+        txtMaLop = new javax.swing.JTextField();
+        txtMonHoc = new javax.swing.JTextField();
+        txtGVPT = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtMaDangNhap = new javax.swing.JTextField();
+        btnDXLH = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,6 +189,13 @@ public class AdminFrame extends javax.swing.JFrame {
 
         cbGioiTinhGV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
+        btnDXGV.setText("Đăng xuất");
+        btnDXGV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDXGVActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -203,7 +235,9 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addComponent(btnDeleteGV)
                 .addGap(60, 60, 60)
                 .addComponent(btnFindGV)
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(btnDXGV)
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,12 +271,13 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addComponent(btnAddGV)
                     .addComponent(btnReSetGV)
                     .addComponent(btnDeleteGV)
-                    .addComponent(btnFindGV))
+                    .addComponent(btnFindGV)
+                    .addComponent(btnDXGV))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("Giảng Viên", jPanel1);
+        Admin.addTab("Giảng Viên", jPanel1);
 
         jLabel9.setText("Họ Và Tên:*");
 
@@ -310,6 +345,20 @@ public class AdminFrame extends javax.swing.JFrame {
 
         jLabel16.setText("Năm nhập học:*");
 
+        btnNhapDiem.setText("Nhập điểm");
+        btnNhapDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhapDiemActionPerformed(evt);
+            }
+        });
+
+        btnDXSV.setText("Đăng xuất");
+        btnDXSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDXSVActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -323,7 +372,11 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addComponent(btnDeleteSV)
                 .addGap(60, 60, 60)
                 .addComponent(btnFindSV)
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addComponent(btnNhapDiem)
+                .addGap(76, 76, 76)
+                .addComponent(btnDXSV)
+                .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -393,7 +446,9 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addComponent(btnAddSV)
                     .addComponent(btnResetSV)
                     .addComponent(btnDeleteSV)
-                    .addComponent(btnFindSV))
+                    .addComponent(btnFindSV)
+                    .addComponent(btnNhapDiem)
+                    .addComponent(btnDXSV))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -403,7 +458,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 952, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -420,7 +475,126 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Sinh Viên", jPanel2);
+        Admin.addTab("Sinh Viên", jPanel2);
+
+        jLabel17.setText("Mã lớp");
+
+        jLabel18.setText("Môn");
+
+        jLabel19.setText("Giảng viên phụ trách");
+
+        tblLopHoc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Mã lớp", "Môn", "Giảng viên phụ trách"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblLopHoc);
+
+        btnAddLH.setText("Thêm mới");
+        btnAddLH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddLHActionPerformed(evt);
+            }
+        });
+
+        btnResetLH.setText("Nhập lại");
+
+        btnDeleteLH.setText("Xóa bỏ");
+        btnDeleteLH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteLHActionPerformed(evt);
+            }
+        });
+
+        btnFindLH.setText("Tìm kiếm");
+        btnFindLH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindLHActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Mã đăng nhập");
+
+        btnDXLH.setText("Đăng xuất");
+        btnDXLH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDXLHActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(btnAddLH)
+                .addGap(71, 71, 71)
+                .addComponent(btnResetLH)
+                .addGap(80, 80, 80)
+                .addComponent(btnDeleteLH)
+                .addGap(99, 99, 99)
+                .addComponent(btnFindLH)
+                .addGap(79, 79, 79)
+                .addComponent(btnDXLH)
+                .addContainerGap(149, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtMaLop)
+                    .addComponent(txtMonHoc)
+                    .addComponent(txtGVPT)
+                    .addComponent(txtMaDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtMaLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtGVPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtMaDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddLH)
+                    .addComponent(btnResetLH)
+                    .addComponent(btnDeleteLH)
+                    .addComponent(btnFindLH)
+                    .addComponent(btnDXLH))
+                .addGap(70, 70, 70)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        Admin.addTab("Lớp học", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -430,14 +604,14 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addGap(341, 341, 341)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1)
+            .addComponent(Admin, javax.swing.GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(Admin))
         );
 
         pack();
@@ -513,6 +687,8 @@ public class AdminFrame extends javax.swing.JFrame {
         
         sVModify.insert(sv);
         
+        System.out.println(gioiTinh);
+        
         showSV();
     }//GEN-LAST:event_btnAddSVActionPerformed
 
@@ -558,6 +734,88 @@ public class AdminFrame extends javax.swing.JFrame {
             showSV();
         }
     }//GEN-LAST:event_btnFindSVActionPerformed
+
+    private void btnDeleteLHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteLHActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = tblLopHoc.getSelectedRow();
+        if (selectedIndex >= 0) {
+            LopHoc sv = lhList.get(selectedIndex);
+            
+            int option = JOptionPane.showConfirmDialog(this, "Bạn muốn xóa?");
+            System.out.println(option);
+            if (option == 0) {
+                lhm.delete(sv);
+            }
+        }
+        showLH();
+    }//GEN-LAST:event_btnDeleteLHActionPerformed
+
+    private void btnFindLHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindLHActionPerformed
+        // TODO add your handling code here:
+        String input = JOptionPane.showInputDialog(this, "Nhập tên sinh viên cần tìm");
+        if (input != null && input.length() > 0) {
+            lhList = lhm.findDiembyMon(input);
+            
+            tblModelLH.setRowCount(0);
+            
+            for (LopHoc lh : lhList) {
+                tblModelLH.addRow(new Object[]{tblModelSV.getRowCount() + 1, lh.getMaLop(), lh.getMonHoc(), lh.getGiangVienPhuTrach(), lh.getMaDangNhap()});
+            }
+        }else{
+            showLH();
+        }
+    }//GEN-LAST:event_btnFindLHActionPerformed
+
+    private void btnAddLHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLHActionPerformed
+        // TODO add your handling code here:
+        String maLop = txtMaLop.getText().trim();     
+        String monHoc = txtMonHoc.getText().trim();
+        String gv = txtGVPT.getText().trim();
+        String maDN = txtMaDangNhap.getText().trim();
+        
+        LopHoc sv = new LopHoc(maLop, monHoc, gv, maDN);
+        
+        lhm.insert(sv);
+        
+        
+        showLH();
+    }//GEN-LAST:event_btnAddLHActionPerformed
+
+    private void btnNhapDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapDiemActionPerformed
+        // TODO add your handling code here:
+        int selectIndex = tblSinhVien.getSelectedRow();
+        if (selectIndex >= 0) {
+            SinhVien sv = svList.get(selectIndex);
+            
+            int option = JOptionPane.showConfirmDialog(this, "Nhập điểm cho sinh viên này?");
+            if (option == 0) {
+                NhapDiemFrame frame = new NhapDiemFrame(sv);
+                frame.setVisible(true);
+                
+            }
+        }
+    }//GEN-LAST:event_btnNhapDiemActionPerformed
+
+    private void btnDXGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDXGVActionPerformed
+        // TODO add your handling code here:
+        LoginForm lf = new LoginForm();
+        lf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDXGVActionPerformed
+
+    private void btnDXSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDXSVActionPerformed
+        // TODO add your handling code here:
+        LoginForm lf = new LoginForm();
+        lf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDXSVActionPerformed
+
+    private void btnDXLHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDXLHActionPerformed
+        // TODO add your handling code here:
+        LoginForm lf = new LoginForm();
+        lf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDXLHActionPerformed
 
     /**
      * @param args the command line arguments
@@ -614,14 +872,33 @@ public class AdminFrame extends javax.swing.JFrame {
         }
     }
     
+    private void showLH(){
+        lhList = lhm.findAll();
+        
+        tblModelLH.setRowCount(0);
+        
+        for (LopHoc lh : lhList) {
+          tblModelLH.addRow(new Object[]{tblModelLH.getRowCount() + 1, lh.getMaLop(), lh.getMonHoc(), lh.getGiangVienPhuTrach(), lh.getMaDangNhap()});
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane Admin;
     private javax.swing.JButton btnAddGV;
+    private javax.swing.JButton btnAddLH;
     private javax.swing.JButton btnAddSV;
+    private javax.swing.JButton btnDXGV;
+    private javax.swing.JButton btnDXLH;
+    private javax.swing.JButton btnDXSV;
     private javax.swing.JButton btnDeleteGV;
+    private javax.swing.JButton btnDeleteLH;
     private javax.swing.JButton btnDeleteSV;
     private javax.swing.JButton btnFindGV;
+    private javax.swing.JButton btnFindLH;
     private javax.swing.JButton btnFindSV;
+    private javax.swing.JButton btnNhapDiem;
     private javax.swing.JButton btnReSetGV;
+    private javax.swing.JButton btnResetLH;
     private javax.swing.JButton btnResetSV;
     private javax.swing.JComboBox<String> cbGioiTinhGV;
     private javax.swing.JComboBox<String> cbGioiTinhSV;
@@ -635,7 +912,11 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -646,17 +927,23 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblGiangVien;
+    private javax.swing.JTable tblLopHoc;
     private javax.swing.JTable tblSinhVien;
     private javax.swing.JTextField txtDayGV;
     private javax.swing.JTextField txtDaySV;
     private javax.swing.JTextField txtEmailGV;
     private javax.swing.JTextField txtEmailSV;
+    private javax.swing.JTextField txtGVPT;
     private javax.swing.JTextField txtHoTenGV;
     private javax.swing.JTextField txtHoTenSV;
+    private javax.swing.JTextField txtMaDangNhap;
+    private javax.swing.JTextField txtMaLop;
+    private javax.swing.JTextField txtMonHoc;
     private javax.swing.JTextField txtMonthGV;
     private javax.swing.JTextField txtMonthSV;
     private javax.swing.JTextField txtNamNhapHoc;

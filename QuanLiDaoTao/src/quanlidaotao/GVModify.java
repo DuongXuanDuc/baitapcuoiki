@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author os
  */
 public class GVModify {
-    public static String DB = "jdbc:mysql://localhost:3306/quanlidaihoc?serverTimezone=UTC";
+    public static String DB = "jdbc:mysql://localhost:3306/quanlidaihoc?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
     public static String user = "root";
     public static String pass = "";
     
